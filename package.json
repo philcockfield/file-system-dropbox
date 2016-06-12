@@ -13,7 +13,11 @@
     "build:watch": "npm run build -- --watch",
     "prepublish": "npm test && npm run lint && npm run build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bluebird": "^3.4.0",
+    "ramda": "^0.21.0",
+    "request": "^2.72.0"
+  },
   "devDependencies": {
     "js-babel": "^6.0.0",
     "js-babel-dev": "^6.0.0",
@@ -25,7 +29,8 @@
     "url": "https://github.com/philcockfield/file-system-dropbox"
   },
   "keywords": [
-    "fs", "dropbox"
+    "fs",
+    "dropbox"
   ],
   "author": {
     "name": "Phil Cockfield",
