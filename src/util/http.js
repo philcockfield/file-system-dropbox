@@ -68,24 +68,31 @@ const request = (options = {}) => new Promise((resolve, reject) => {
 
 
 
-const verb = (method, uri, body, options = {}) => {
-  options = R.merge(options, { method, uri, body });
-  return request(options);
-};
-const get = (uri, options) => verb('GET', uri, undefined, options);
-const put = (uri, body, options) => verb('PUT', uri, body, options);
-const post = (uri, body, options) => verb('POST', uri, body, options);
-const patch = (uri, body, options) => verb('PATCH', uri, body, options);
-const del = (uri, options) => verb('DELETE', uri, undefined, options);
 
 
+/**
+ * Returns an HTTP API that can talk to Dropbox with the given
+ * authentication token.
+ *
+ * @param {String} token: The auth token from dropbox.
+ *
+ * @return {Object}.
+ */
+export default (token) => {
+  const verb = (method, uri, body, options = {}) => {
+    options = R.merge(options, {
+      method,
+      uri,
+      body,
+      auth: { bearer: token },
+    });
+    return request(options);
+  };
+  const post = (uri, body, options) => verb('POST', uri, body, options);
 
-// API.
-export default {
-  request,
-  get,
-  put,
-  post,
-  patch,
-  delete: del,
+  // API.
+  return {
+    token,
+    post,
+  };
 };
