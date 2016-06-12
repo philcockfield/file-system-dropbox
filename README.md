@@ -9,6 +9,8 @@ Tools for syncing Dropbox to the local file-system.
 
     npm test
 
+#### Integration Tests
+To test against Dropbox ensure you have a `FILE_SYSTEM_DROPBOX_TOKEN` set as an environment-variable with a valid authentication token.
 
 ---
 ### License: MIT
