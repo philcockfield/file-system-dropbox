@@ -1,4 +1,6 @@
+import Promise from 'bluebird';
 import { expect } from 'chai';
+import m from '../src';
 import * as util from '../src/util';
 import { http, dropbox } from '../src/util';
 
@@ -21,11 +23,24 @@ describe('connection', function() {
   });
 
 
-  it('downloads files', () => {
+  it('downloads file', () => {
     return api
       .download('/nic/README.md')
       .then(result => {
         console.log("result", result);
       });
   });
+
+  it.only('downloads folder', () => (async () => {
+
+
+    console.log("Downloading folder", "/");
+    console.log("");
+    const result = await api.downloadFolder('/');
+    console.log("result", result);
+
+
+  })());
+
+
 });
