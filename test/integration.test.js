@@ -7,7 +7,7 @@ import { http } from '../src/util';
 const TOKEN = process.env.FILE_SYSTEM_DROPBOX_TOKEN;
 
 
-describe.skip('connection', function() {
+describe('connection', function() {
   it('lists root folders', () => {
 
     const args = {
