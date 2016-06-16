@@ -11,7 +11,7 @@ const api = dropbox(TOKEN);
 
 
 
-describe('connection', function() {
+describe.skip('connection', function() {
   this.timeout(10000);
 
   it('lists root folders', () => {
@@ -34,11 +34,16 @@ describe('connection', function() {
   it.only('downloads folder', () => (async () => {
 
 
-    console.log("Downloading folder", "/");
-    console.log("");
+    // console.log("Downloading folder", "/");
+    // console.log("");
     const result = await api.downloadFolder('/');
-    console.log("result", result);
+    // console.log("result", result);
 
+    result.files.forEach(file => {
+      console.log("file:", file.name);
+      console.log(file.data);
+      console.log("");
+    });
 
   })());
 
