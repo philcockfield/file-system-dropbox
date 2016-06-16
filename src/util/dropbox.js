@@ -69,21 +69,21 @@ const downloadFiles = (post, paths, options) => Promise
 
 
 
-  /**
-   * Downloads all files within a folder.
-   *
-   * @param {Function} post: The POST helpers.
-   * @param {Array} path: The array to the folder.
-   * @param {Object} options
-   *
-   * @return {Promise}.
-   */
-  const downloadFolder = (post, path, options) => (async () => {
-    const folder = await listFolder(post, path);
-    const paths = folder.files.map(item => item.path_display);
-    return downloadFiles(post, paths, options);
-  })();
 
+/**
+ * Downloads all files within a folder.
+ *
+ * @param {Function} post: The POST helpers.
+ * @param {Array} path: The array to the folder.
+ * @param {Object} options
+ *
+ * @return {Promise}.
+ */
+const downloadFolder = (post, path, options) => (async () => {
+  const folder = await listFolder(post, path);
+  const paths = folder.files.map(item => item.path_display);
+  return downloadFiles(post, paths, options);
+})();
 
 
 
@@ -104,13 +104,12 @@ export default (token) => {
       const isSuccess = result.status.toString().startsWith('2');
       if (isSuccess) {
         return result; // Success.
-      } else {
-        // Error: Not a 200.
-        const err = new Error(`${ result.status } ${ result.message }. ${ path }`);
-        err.status = result.status;
-        err.headers = result.headers;
-        throw err;
       }
+      // Error: Not a 200.
+      const err = new Error(`${ result.status } ${ result.message }. ${ path }`);
+      err.status = result.status;
+      err.headers = result.headers;
+      throw err;
     });
 
   return {
